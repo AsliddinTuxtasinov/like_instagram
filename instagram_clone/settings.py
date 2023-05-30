@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+
+import django.core.mail.backends.base
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'instagram_clone.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,3 +131,6 @@ MEDIA_ROOT = BASE_DIR / "media/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# email settings
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
