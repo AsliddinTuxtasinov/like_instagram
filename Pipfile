@@ -9,6 +9,7 @@ django = "*"
 djangorestframework = "*"
 pillow = "*"
 djangorestframework-simplejwt = "*"
+twilio = "*"
 
 [dev-packages]
 

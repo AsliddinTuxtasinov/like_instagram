@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     # URL pattern for the sign-up api
-    path("sign-up/", views.SignUpViews.as_view(), name="sign-up-new")
+    path("signup/", views.SignUpViews.as_view(), name="sign-up-new"),
+    path("verify/", views.VerifyAPIViews.as_view(), name="verify-sign-up-code")
 ]

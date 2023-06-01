@@ -1,7 +1,7 @@
 from django.db.models import Q
 from rest_framework import serializers, exceptions
 
-from shared.utilty import check_email_or_phone, send_message_to_email
+from shared.utilty import check_email_or_phone, send_message_to_email, send_phone_code
 from .models import User, UserConfirmation, VIA_EMAIL, VIA_PHONE
 
 
@@ -26,7 +26,7 @@ class SignUpSerializers(serializers.ModelSerializer):
             send_message_to_email(email=user.email, code=code)
         elif user.auth_type == VIA_PHONE:
             code = user.create_verify_code(VIA_PHONE)
-            print("code: ", code)
+            send_message_to_email(email=user.phone_number, code=code)
             # send_phone_code(user.phone_number, code)
         user.save()
         return user

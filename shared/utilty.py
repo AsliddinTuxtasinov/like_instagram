@@ -1,6 +1,9 @@
 import re
 import threading
 
+from decouple import config
+from twilio.rest import Client
+
 from django.core.mail import EmailMessage
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
@@ -87,3 +90,15 @@ def send_message_to_email(email, code):
         "to_email": email,
         "content_type": "html"
     })
+
+
+def send_phone_code(phone_number, code):
+    account_sid = config("account_sid")
+    auth_token = config("your_auth_token")
+
+    client = Client(account_sid, auth_token)
+    client.messages.create(
+        to=phone_number,  # +12316851234,
+        from_="+15555555555",  # from twilio
+        body=f"Hello there!, Your verification code is: {code}"
+    )
